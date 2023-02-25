@@ -1,11 +1,10 @@
-const serchBtn = document.getElementById("serch-btn");
 const imageContainer = document.getElementById("image-container");
 
 //Unsplash Api
 const count = 10;
 const apiKey = "UbgvhvO6U7VhwuEhme7J09qZKZTZghpTo5NUsMC2LLg";
-const apiUrl = `https://api.unsplash.com/photos/?client_id=${apiKey}&count=${count}`;
-let photoArray;
+const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${count}`;
+let photoArray = [];
 
 // helper function to set attributes on dom elements
 const setAttributes = (element, attributes) => {
@@ -50,5 +49,14 @@ const getPhotos = async () => {
   }
 };
 
+window.addEventListener("scroll", () => {
+  if (
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
+    ready
+  ) {
+    ready = false;
+    getPhotos();
+  }
+});
 //on load
 getPhotos();
